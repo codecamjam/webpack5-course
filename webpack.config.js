@@ -1,23 +1,7 @@
 const path = require("path");
 const TerserPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-
-/**
- * BASICALLY IN THIS LESSON,
- * he explains that we want to use caching in order
- * to prevent unnecessary file serving to our websites.
- *
- * However, when we update our js/css, we want to send
- * those changes to our customers who may have our site
- * saved in their browsing cache.
- *
- * Browser cache updates when a file name changes, so
- * this is why we use contenthash. it basically
- * is a trick to update files that are cached
- *
- * js:  filename: "bundle.[contenthash].js",
- * css: filename: "styles.[contenthash].css",
- */
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.js",
@@ -67,6 +51,42 @@ module.exports = {
     new TerserPlugin(),
     new MiniCssExtractPlugin({
       filename: "styles.[contenthash].css",
+    }),
+    /**
+     * this auto cleans our dist folder and removes clutter
+     * when we have multiple hashed files from builds
+     */
+    // new CleanWebpackPlugin(),
+    //we can also add options: in this example, we have another folder (build)
+    new CleanWebpackPlugin({
+      /**
+       * this removes old files before webpack generates new files
+       * and you can specify an array of file patterns which you want to remove
+       * and these patterns are relative to output in
+       *  path.resolve(__dirname, "./dist")
+       */
+
+      cleanOnceBeforeBuildPatterns: [
+        /**
+         * THIS MEANS TO REMOVE ALL THE FILES TOGETHER
+         * WITH SUBDIRECTORIES INSIDE DIST FOLDER
+         * NO MATTER HOW NESTED LEVELS
+         *
+         * AND THIS IS HOW CLEAN ONCE BEFORE BUILT PATTERNS
+         * WORKS BY DEFAULT IF YOU DONT MODIFY IT
+         *
+         *
+         */
+        "**/*",
+        /**
+         * However, if you want to remove the files
+         * outside of the dist folder,
+         * you should specify an absolute path to file patterns
+         * this will remove all the files together with sub
+         * folders inside the build folder
+         */
+        path.join(process.cwd(), "build/**/*"),
+      ],
     }),
   ],
 };
