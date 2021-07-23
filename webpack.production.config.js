@@ -4,14 +4,9 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  // entry: "./src/index.js",
-  entry: {
-    helloWorld: "./src/helloWorld.js",
-    kiwi: "./src/kiwi.js",
-  },
+  entry: "./src/index.js",
   output: {
-    // filename: "bundle.[contenthash].js",
-    filename: "[name].[contenthash].js",
+    filename: "bundle.[contenthash].js",
     path: path.resolve(__dirname, "./dist"),
     publicPath: "",
   },
@@ -19,23 +14,15 @@ module.exports = {
   optimization: {
     splitChunks: {
       chunks: "all",
-      minSize: 3000, //approx 3kb
+      minSize: 10000,
+      automaticNameDelimiter: "_",
     },
   },
   module: {
     rules: [
       {
         test: /\.(png|jpg)$/,
-        type: "asset",
-        parser: {
-          dataUrlCondition: {
-            maxSize: 3 * 1024,
-          },
-        },
-      },
-      {
-        test: /\.txt/,
-        type: "asset/source",
+        use: ["file-loader"],
       },
       {
         test: /\.css$/,
@@ -64,23 +51,13 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      // filename: "styles.[contenthash].css",
-      filename: "[name].[contenthash].css",
+      filename: "styles.[contenthash].css",
     }),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      filename: "helloWorld.html",
-      chunks: ["helloWorld"],
       title: "Hello world",
+      description: "Hello world",
       template: "src/page-template.hbs",
-      description: "Some description",
-    }),
-    new HtmlWebpackPlugin({
-      filename: "kiwi.html",
-      chunks: ["kiwi"],
-      title: "Kiwi",
-      template: "src/page-template.hbs",
-      description: "Some description",
     }),
   ],
 };

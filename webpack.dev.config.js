@@ -3,11 +3,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  // entry: "./src/index.js",
-  entry: {
-    helloWorld: "./src/helloWorld.js",
-    kiwi: "./src/kiwi.js",
-  },
+  entry: "./src/index.js",
   output: {
     filename: "[name].bundle.js",
     path: path.resolve(__dirname, "./dist"),
@@ -18,22 +14,12 @@ module.exports = {
     contentBase: path.resolve(__dirname, "./dist"),
     index: "index.html",
     port: 9000,
-    writeToDisk: true,
   },
   module: {
     rules: [
       {
         test: /\.(png|jpg)$/,
-        type: "asset",
-        parser: {
-          dataUrlCondition: {
-            maxSize: 3 * 1024,
-          },
-        },
-      },
-      {
-        test: /\.txt/,
-        type: "asset/source",
+        use: ["file-loader"],
       },
       {
         test: /\.css$/,
@@ -63,20 +49,9 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      filename: "helloWorld.html",
-      chunks: ["helloWorld"],
       title: "Hello world",
-      template: "src/page-template.hbs",
       description: "Hello world",
-      minify: false,
-    }),
-    new HtmlWebpackPlugin({
-      filename: "kiwi.html",
-      chunks: ["kiwi"],
-      title: "Kiwi",
       template: "src/page-template.hbs",
-      description: "Kiwi",
-      minify: false,
     }),
   ],
 };
