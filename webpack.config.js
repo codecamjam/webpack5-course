@@ -4,14 +4,15 @@ module.exports = {
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "./dist"),
+    //publicPath: 'auto' in webpack 5 this is set automatically
+    //in webpack 4, the default was ''
+    publicPath: "dist/",
+    //for a cdn
+    // publicPath: "http://some-cdn.com/",
   },
   mode: "none",
   module: {
     rules: [
-      // {
-      //   test: /\.(ttf)$/,
-      //   type: "asset/resource",
-      // },
       {
         test: /\.(png|jpg)$/,
         type: "asset/resource",
