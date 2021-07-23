@@ -2,10 +2,27 @@ const path = require("path");
 const TerserPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
+/**
+ * BASICALLY IN THIS LESSON,
+ * he explains that we want to use caching in order
+ * to prevent unnecessary file serving to our websites.
+ *
+ * However, when we update our js/css, we want to send
+ * those changes to our customers who may have our site
+ * saved in their browsing cache.
+ *
+ * Browser cache updates when a file name changes, so
+ * this is why we use contenthash. it basically
+ * is a trick to update files that are cached
+ *
+ * js:  filename: "bundle.[contenthash].js",
+ * css: filename: "styles.[contenthash].css",
+ */
+
 module.exports = {
   entry: "./src/index.js",
   output: {
-    filename: "bundle.js",
+    filename: "bundle.[contenthash].js",
     path: path.resolve(__dirname, "./dist"),
     publicPath: "dist/",
   },
@@ -48,27 +65,8 @@ module.exports = {
   },
   plugins: [
     new TerserPlugin(),
-    /*****
-     * this plugin is used to create a separate css file
-     * as opposed to including it in our js bundle
-     * (before using this, if you inspected the dom with
-     * dev tools, our styles were included in the html head)
-     *
-     * WE HAVE TO MODIFY OUR RULES TO USE THIS PLUGIN
-     * in our css and sass rules above,
-     *  we replaced style-loader with
-     * MiniCssExtractPlugin.loader
-     *
-     * DONT FORGET TO INCLUDE styles.css into our html markup
-     *
-     * TLDR:
-     *
-     * MINI-CSS-EXTRACT-PLUGIN extracts all our styles in our
-     * application and puts them
-     * in a single css file under the dist folder
-     */
     new MiniCssExtractPlugin({
-      filename: "styles.css",
+      filename: "styles.[contenthash].css",
     }),
   ],
 };
