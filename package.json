@@ -18,7 +18,9 @@
     "url": "https://github.com/codecamjam/webpack5-course/issues"
   },
   "homepage": "https://github.com/codecamjam/webpack5-course#readme",
-  "dependencies": {},
+  "dependencies": {
+    "handlebars": "^4.7.7"
+  },
   "devDependencies": {
     "@babel/core": "^7.14.8",
     "@babel/plugin-proposal-class-properties": "^7.14.5",
@@ -26,6 +28,7 @@
     "babel-loader": "^8.2.2",
     "clean-webpack-plugin": "^4.0.0-alpha.0",
     "css-loader": "^6.2.0",
+    "handlebars-loader": "^1.7.1",
     "html-webpack-plugin": "^5.3.2",
     "mini-css-extract-plugin": "^2.1.0",
     "sass": "^1.35.2",
