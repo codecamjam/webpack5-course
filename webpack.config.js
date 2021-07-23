@@ -9,17 +9,9 @@ module.exports = {
   output: {
     filename: "bundle.[contenthash].js",
     path: path.resolve(__dirname, "./dist"),
-    /**
-     * because we had publicPath set to -> dist/,
-     * when we used html-webpack-plugin for first time,
-     * our refs were wrong
-     * dist/bundle.f4a31e2d7bee575e203c.js
-     *
-     * so thats why we set public path to empty now
-     */
     publicPath: "",
   },
-  mode: "none",
+  mode: "development", //none development production
   module: {
     rules: [
       {
