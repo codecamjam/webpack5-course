@@ -24,25 +24,21 @@ module.exports = {
         type: "asset/source",
       },
       {
-        /**
-         * This rule tells wp that every time it tries to import
-         * a css file, it needs to use these loaders
-         * here we specify one or more loaders
-         * CSS LOADER - reads contents of css file and returns content (but nothing else)
-         * STYLE LOADER - takes the css and injects it into the page using style tags
-         * btw using style loader bundles your css together with js into a single resulting file
-         * called bundle.js. later we'll see how to generate separate files
-         *
-         * WITH ASSET MODULES, we didnt have to install any additional we didnt have to
-         * install any additional npm packages bc wp includes asset modules out of the box
-         *
-         * BUT when using loaders, we have to install them explicitely
-         * so every webpack loader comes as an npm package that you add
-         * as a dependency to your app:
-         * npm i css-loader and style-loader --save-dev
-         */
         test: /\.css$/,
         use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.scss$/,
+        /**
+         * WEBPACK PROCESS LOADERS FROM RIGHT TO LEFT!!!!
+         * 1 invoke sass loader which converts sass to css
+         * 2 invoke css loader which converts css to js representation
+         * 3 invoke style loader which creates style tags inside html tags
+         * and injects the css into it
+         * DONT FORGET TO:
+         * npm i sass-loader sass --save-dev
+         */
+        use: ["style-loader", "css-loader", "sass-loader"],
       },
     ],
   },
