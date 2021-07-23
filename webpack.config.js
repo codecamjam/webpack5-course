@@ -12,23 +12,37 @@ module.exports = {
     rules: [
       {
         test: /\.(png|jpg)$/,
-        // type: "asset/resource", //good for massive files
-        // type: "asset/inline", //good for svgs and small imgs
-        type: "asset", //auto chooses between resource or inline
-        //default: if file < 8kb  ? inline : resource
-        //you can change that default number with parser
+        type: "asset",
         parser: {
-          //condition based on which you should use inline or resource
           dataUrlCondition: {
             maxSize: 3 * 1024,
-          }, // in this example, 3kb
+          },
         },
       },
       {
         test: /\.txt/,
         type: "asset/source",
-        //this means that webpack will read content of txt file
-        //and give us a JS string
+      },
+      {
+        /**
+         * This rule tells wp that every time it tries to import
+         * a css file, it needs to use these loaders
+         * here we specify one or more loaders
+         * CSS LOADER - reads contents of css file and returns content (but nothing else)
+         * STYLE LOADER - takes the css and injects it into the page using style tags
+         * btw using style loader bundles your css together with js into a single resulting file
+         * called bundle.js. later we'll see how to generate separate files
+         *
+         * WITH ASSET MODULES, we didnt have to install any additional we didnt have to
+         * install any additional npm packages bc wp includes asset modules out of the box
+         *
+         * BUT when using loaders, we have to install them explicitely
+         * so every webpack loader comes as an npm package that you add
+         * as a dependency to your app:
+         * npm i css-loader and style-loader --save-dev
+         */
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
       },
     ],
   },
