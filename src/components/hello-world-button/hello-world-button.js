@@ -1,13 +1,6 @@
 import "./hello-world-button.scss";
 
 class HelloWorldButton {
-  //this is example of class property and
-  //not supported by major browsers
-  //most only allow methods inside js classes but not
-  //properties
-  //actually this is supported out of the box now
-  //but any brand new features would probably throw an error
-  //like pipeline operator
   buttonCssClass = "hello-world-button";
 
   render() {
