@@ -1,15 +1,6 @@
 const path = require("path");
-/*****
- * this is a dev dependency because
- * we only need it during the build process
- * THIS PLUGIN IS NOT NECESSARY FOR WEBPACK V 5
- * BUT HE ADDED IT FOR LEARNING PURPOSES
- *
- * this minifies our JS bundle
- *
- * terser plugin is the new standard for minifying
- */
 const TerserPlugin = require("terser-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   entry: "./src/index.js",
@@ -36,11 +27,11 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
       {
         test: /\.scss$/,
-        use: ["style-loader", "css-loader", "sass-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
       {
         test: /\.js$/,
@@ -55,5 +46,23 @@ module.exports = {
       },
     ],
   },
-  plugins: [new TerserPlugin()],
+  plugins: [
+    new TerserPlugin(),
+    /*****
+     * this plugin is used to create a separate css file
+     * as opposed to including it in our js bundle
+     * (before using this, if you inspected the dom with
+     * dev tools, our styles were included in the html head)
+     *
+     * WE HAVE TO MODIFY OUR RULES TO USE THIS PLUGIN
+     * in our css and sass rules above,
+     *  we replaced style-loader with
+     * MiniCssExtractPlugin.loader
+     *
+     * DONT FORGET TO INCLUDE styles.css into our html markup
+     */
+    new MiniCssExtractPlugin({
+      filename: "styles.css",
+    }),
+  ],
 };
