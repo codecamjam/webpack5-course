@@ -60,6 +60,12 @@ module.exports = {
      * MiniCssExtractPlugin.loader
      *
      * DONT FORGET TO INCLUDE styles.css into our html markup
+     *
+     * TLDR:
+     *
+     * MINI-CSS-EXTRACT-PLUGIN extracts all our styles in our
+     * application and puts them
+     * in a single css file under the dist folder
      */
     new MiniCssExtractPlugin({
       filename: "styles.css",
