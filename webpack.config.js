@@ -1,4 +1,5 @@
 const path = require("path");
+
 module.exports = {
   entry: "./src/index.js",
   output: {
@@ -22,6 +23,12 @@ module.exports = {
             maxSize: 3 * 1024,
           }, // in this example, 3kb
         },
+      },
+      {
+        test: /\.txt/,
+        type: "asset/source",
+        //this means that webpack will read content of txt file
+        //and give us a JS string
       },
     ],
   },
