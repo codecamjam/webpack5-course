@@ -74,7 +74,6 @@ module.exports = {
       title: "Hello world",
       template: "src/page-template.hbs",
       description: "Some description",
-      minify: false, //defaults to true
     }),
     new HtmlWebpackPlugin({
       filename: "kiwi.html",
@@ -82,7 +81,6 @@ module.exports = {
       title: "Kiwi",
       template: "src/page-template.hbs",
       description: "Some description",
-      minify: false, //defaults to true
     }),
   ],
 };
