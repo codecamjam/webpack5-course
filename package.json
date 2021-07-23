@@ -1,0 +1,25 @@
+{
+  "name": "webpack5-course",
+  "version": "1.0.0",
+  "description": "Taking the plunge and properly learning webpack finally",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codecamjam/webpack5-course.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codecamjam/webpack5-course/issues"
+  },
+  "homepage": "https://github.com/codecamjam/webpack5-course#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "webpack": "^5.46.0",
+    "webpack-cli": "^4.7.2"
+  }
+}
