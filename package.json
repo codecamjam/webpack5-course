@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/codecamjam/webpack5-course#readme",
   "dependencies": {
-    "handlebars": "^4.7.7"
+    "handlebars": "^4.7.7",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@babel/core": "^7.14.8",
